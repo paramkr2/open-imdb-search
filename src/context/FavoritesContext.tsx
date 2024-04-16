@@ -30,12 +30,11 @@ export const FavoritesContext = createContext<FavoritesContextType | null>({ fav
 
 // Define the reducer function
 const reducer = (state: Item[], action: Action) => {
-	console.log('action',action)
   switch (action.type) {
     case 'ADD':
       return [...state, action.item];
     case 'REMOVE':
-      return state.filter(item => item.imdbID !== action.item.imdbID);
+      return state.filter(item => item.imdbID != action.item.imdbID);
     default:
       return state;
   }

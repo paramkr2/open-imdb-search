@@ -3,6 +3,7 @@ import {Box,Card,CardContent,Typography,CardMedia,CardHeader,Avatar , Button} fr
 import IconButton, { IconButtonProps } from '@mui/material/IconButton';
 import MoreVertIcon from '@mui/icons-material/MoreVert';
 import { red } from '@mui/material/colors';
+import {Link} from 'react-router-dom'
 
 import {FavoritesContext} from '../context/FavoritesContext'
 
@@ -18,56 +19,61 @@ const ListItem = ({item}) => {
 				setPresent(true)
 			}
 		}
-	},[favorites])
+	},[])
 
 	const addToFavorites = () => {
 		console.log('adding',item)
 		dispatch({type:'ADD',item:item})
+		setPresent(true);
 
 	}
 
 	const removeFromFavorites = () => {
-
+		dispatch({type:'REMOVE',item:item})
+		setPresent(false)
 	}
 
 	return (
 		<Box>
+			
+				<Card variant="outlined">
+					<Link to={`/item/${imdbID}`}  >
+					 <CardHeader
+				        avatar={
+				          <Avatar sx={{ bgcolor: red[500] }} aria-label="recipe">
+				            R
+				          </Avatar>
+				        }
+				        action={
+				          <IconButton aria-label="settings">
+				            <MoreVertIcon/>
+				          </IconButton>
+				        }
+				        title={Title}
+				        subheader="September 14, 2016"
+				      />
+				      <CardMedia
+				        component="img"
+				        height="194"
+				        image= {`${Poster}`}
+				        alt="Paella dish"
+				      />
+					<CardContent>
+				      <Typography sx={{ fontSize: 14 }} color="text.secondary" gutterBottom>
+				        {Title}
+				      </Typography>
+				      <Typography sx={{ mb: 1.5 }} color="text.secondary">
+				        {Year}
+				      </Typography>
+			    </CardContent>
+			    </Link>
+				{ ! present ? (
+					<Button onClick={addToFavorites} > Add </Button> 
+				):( <Button onClick={removeFromFavorites} > Remove </Button>
+				)}
 
-			<Card variant="outlined">
-				 <CardHeader
-			        avatar={
-			          <Avatar sx={{ bgcolor: red[500] }} aria-label="recipe">
-			            R
-			          </Avatar>
-			        }
-			        action={
-			          <IconButton aria-label="settings">
-			            <MoreVertIcon/>
-			          </IconButton>
-			        }
-			        title={Title}
-			        subheader="September 14, 2016"
-			      />
-			      <CardMedia
-			        component="img"
-			        height="194"
-			        image= {`${Poster}`}
-			        alt="Paella dish"
-			      />
-				<CardContent>
-			      <Typography sx={{ fontSize: 14 }} color="text.secondary" gutterBottom>
-			        {Title}
-			      </Typography>
-			      <Typography sx={{ mb: 1.5 }} color="text.secondary">
-			        {Year}
-			      </Typography>
-		    </CardContent>
-			{ ! present ? (
-				<Button onClick={addToFavorites} > Add </Button> 
-			):( <Button onClick={removeFromFavorites} > Remove </Button>
-			)}
-
-			</Card>
+				</Card>
+			
 		</Box> 
 		
 

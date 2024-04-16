@@ -1,24 +1,31 @@
-import React, { useState } from 'react';
+import React, { useState ,useEffect } from 'react';
 import Box from '@mui/material/Box';
-import { Grid, TextField, Button, CircularProgress , Skeleton } from '@mui/material';
+import { Grid, TextField, Button, CircularProgress , Skeleton ,Pagination} from '@mui/material';
 
 import ListItem from './ListItem';
 
 const ListMovies = ({list,search}) => {
   const [searching, setSearching] = useState(false);
+  const [page,setPage] = useState(()=> sessionStorage.getItem('page')|| 1 );
+  const [searchQuery , setSearchQuery] = useState(()=> sessionStorage.getItem('searchQuery')|| 'fifa' );
+
+  useEffect( ()=>{
+  		if( searchQuery != null ){
+    		search( searchQuery , page ).then( ()=> { setSearching(false)})
+    	}
+   },[page,searchQuery]);
 
   const handleSubmit = async (event) => {
-    try {
-    	setSearching(true)
-    	
-    	event.preventDefault();
-    	await search( event.target.movieSearch.value);
-    } catch (err) {
-      console.error(err);
-    } finally {
-      setSearching(false);
-    }
-  };
+  	 event.preventDefault();
+  	 setSearchQuery(event.target.movieSearch.value)
+  	 sessionStorage.setItem('searchQuery', event.target.movieSearch.value);
+  }
+
+  const handlePageChange = (event,value)=>{
+  	setSearching(true);
+  	setPage(value);
+  	sessionStorage.setItem('page', value);
+  }
 
   return (
     <Box sx={{
@@ -42,6 +49,7 @@ const ListMovies = ({list,search}) => {
       }
     }}>
 
+
       <Box component="form" onSubmit={handleSubmit}>
         <TextField
           name='movieSearch'
@@ -55,11 +63,18 @@ const ListMovies = ({list,search}) => {
           <Button className="searchButton" type='submit' variant="contained">Search</Button>
         )}
       </Box>
-
+      	<Pagination
+	        count={10} // Total number of pages
+	        page={page} // Current page
+	        onChange={handlePageChange} // Page change handler
+	        variant="outlined"
+	        color="primary"
+	        shape="rounded"
+	      />
       <Grid container spacing={2}>
         {list && list.map((list) => (
           <Grid item key={list.imdbID} xs={12} sm={6} md={4} lg={3}>
-            <ListItem item={list} />
+            <ListItem key={list.imdbID} item={list} />
           </Grid>
         ))}
         {searching &&
@@ -71,6 +86,7 @@ const ListMovies = ({list,search}) => {
 		}
       </Grid>
 
+      
 
     </Box>
   );
