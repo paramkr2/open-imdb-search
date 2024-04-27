@@ -33,10 +33,6 @@ ul :is(li):hover{
 
 }
 
-ul li button{
-	color:red;
-}
-
 .gridContainer{
 	padding: 0 10px 0 10px ;
 }
