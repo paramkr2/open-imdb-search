@@ -21,7 +21,7 @@ interface RemoveAction {
 }
 
 interface FavoritesContextType {
-  fav: Item[];
+  favorites: Item[];
   dispatch: Dispatch<Action>;
 }
 

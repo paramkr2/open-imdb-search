@@ -1,0 +1,39 @@
+.navbar {
+    background-color: var(--dark-green) ;
+    padding:10px;
+    color: var(--lightest-slate);
+    font-family: 'NTR';
+    font-weight: bold;
+    font-size:1.5em;
+  }
+.navbar .navbar-brand{
+  font-size:1.8em;
+}
+.navbar a:any-link{
+  color:white;
+}
+
+.navbar a:hover{
+  color:white;
+}
+
+.navbar .bookmark{
+  font-size:30px;
+}
+
+
+.navbar .bookmark-count{
+    content:attr(count);
+    font-size:20px;
+    color:whitesmoke;
+    position:absolute;
+    transform: translate(-2.8rem,-0.4rem);
+}
+
+
+@media only screen and (max-width: 600px) {
+  .navbar-light .navbar-brand  {
+      display: none;
+  }
+
+}

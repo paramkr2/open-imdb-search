@@ -11,6 +11,18 @@
   text-rendering: optimizeLegibility;
   -webkit-font-smoothing: antialiased;
   -moz-osx-font-smoothing: grayscale;
+
+  --dark-green: #344e41;
+  --bgcolor: whitesmoke;
+  --light-navy: #112240;
+  --lightest-navy: #233554;
+  --navy-shadow: rgba(2, 12, 27, 0.7);
+  --slate: #8892b0;
+  --light-slate: #a8b2d1;
+  --lightest-slate: #ccd6f6;
+  --white: #e6f1ff;
+  --green-bright: #64ffda;
+  --green-tint: rgba(100, 255, 218, 0.1);
 }
 
 a {
@@ -19,7 +31,8 @@ a {
   text-decoration: inherit;
 }
 a:hover {
-  color: #535bf2;
+  transform:scale(1.05);
+  transition: transform 0.5s ease;
 }
 
 body {

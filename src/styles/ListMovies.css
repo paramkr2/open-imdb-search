@@ -1,0 +1,42 @@
+.searchBarWrapper{
+	display:block;
+	background-color:whitesmoke;
+	padding:10px;
+}
+
+.searchBar{
+	width:50%;
+	border: 4px solid var(--dark-green);
+	border-radius: 15px 5px 5px 15px;
+	padding:10px;
+	font-size:2em;
+}
+
+.searchButton{
+	padding:10px;
+	font-size:2em;
+	margin-left:10px;
+	background-color: var(--dark-green);
+	border-radius:5px 15px 15px 5px ;
+	color:white;
+}
+
+.searchButton :hover{
+	background-color:white;
+	color:var(--dark-green);
+
+	border:4px solid var(--dark-green);
+}
+
+ul :is(li):hover{
+	transform:scale(1.2);
+
+}
+
+ul li button{
+	color:red;
+}
+
+.gridContainer{
+	padding: 0 10px 0 10px ;
+}
